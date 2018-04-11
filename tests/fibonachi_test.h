@@ -67,7 +67,7 @@ TEST(protest, show)
      load(txt,(char *)"testi/load.txt");
 
 
-printf("BINGOOOO %d", txt->cursor->position);
+//printf("BINGOOOO %d", txt->cursor->position);
      show(txt);
 
 
@@ -83,7 +83,7 @@ dup2(oldstdout,STDOUT);
      int readcount = fread(buf,1,512,t2);
 
      FILE *d2;
-     d2 =fopen("testi/proverka.txt","rw");
+     d2 =fopen("testi/proveka.txt","rw");
      if(d2 == NULL){
             FAIL();
             return;
@@ -139,8 +139,8 @@ TEST(protest, pp_first_line)
      while(!feof(d2)){
      readcount2+=fread(buf2,1,512,d2);
         }
-   while(!feof(t2) && !feof(d2)){
-        /*char* k1 = fgets(buf1, 512, t2);
+   /*while(!feof(t2) && !feof(d2)){
+        char* k1 = fgets(buf1, 512, t2);
         char* k2 = fgets(buf2, 512, d2);
         if(k1==k2){*/
          for(i=0;i<512;i++){
@@ -149,9 +149,8 @@ TEST(protest, pp_first_line)
          //}
          /**buf1 = "";
          *buf2 = "";*/
-   }
+   //}
 }
-
 
      fclose(t2);
      fclose(d2);
@@ -166,14 +165,14 @@ TEST(protest, pp_second_line)
      int fptr;
      int oldstdout;
      int i=0;
-     fptr = open("DUMMY.PIL",O_CREAT|O_RDWR,S_IREAD|S_IWRITE);
+     fptr = open("DUMMY.MIL",O_CREAT|O_RDWR,S_IREAD|S_IWRITE);
      oldstdout = dup(STDOUT);
      dup2(fptr,STDOUT);
      close(fptr);
 
      text txt = create_text();
      load(txt,(char *)"testi/load.txt");
-     c_to_pos(txt,0,0);
+     c_to_pos(txt,1,0);
      pp(txt,(char *)"good");
 
 
@@ -181,7 +180,7 @@ TEST(protest, pp_second_line)
      dup2(oldstdout,STDOUT);
 
      FILE *t2;
-     t2 = fopen("DUMMY.PIL","rw");
+     t2 = fopen("DUMMY.MIL","rw");
      if(t2 == NULL){
             FAIL();
             return;
@@ -203,8 +202,8 @@ TEST(protest, pp_second_line)
      while(!feof(d2)){
      readcount2+=fread(buf2,1,512,d2);
         }
-   while(!feof(t2) && !feof(d2)){
-        /*char* k1 = fgets(buf1, 512, t2);
+   /*while(!feof(t2) && !feof(d2)){
+        char* k1 = fgets(buf1, 512, t2);
         char* k2 = fgets(buf2, 512, d2);
         if(k1==k2){*/
          for(i=0;i<512;i++){
@@ -213,7 +212,7 @@ TEST(protest, pp_second_line)
          //}
          /**buf1 = "";
          *buf2 = "";*/
-   }
+  // }
 }
 
 
