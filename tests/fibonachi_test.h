@@ -16,7 +16,7 @@ TEST (abc, test1)
     text txt = create_text();
     ASSERT_EQ(pos_return(txt), 0);
 }
-TEST(protest, null_file)
+/*TEST(protest, null_file)
 {
      int fptr;
      int oldstdout;
@@ -25,8 +25,11 @@ TEST(protest, null_file)
      dup2(fptr,STDOUT);
      close(fptr);
 
+     char *filedir=(char*)malloc(1024);
+     sprintf(filedir, "%s/load.k", TESTIDIR);
+
      text txt = create_text();
-     load(txt,(char *)"testi/load.c");
+     load(txt, filedir);
      dup2(oldstdout,STDOUT);
 
      FILE *t;
@@ -39,7 +42,10 @@ TEST(protest, null_file)
      int readcount = fread(buf,1,512,t);
 
      FILE *d;
-     d =fopen("testi/fail.txt","rw");
+
+     sprintf(filedir, "%s/fail.txt", TESTIDIR);
+     d =fopen(filedir,"rw");
+
      if(d == NULL){
             FAIL();
             return;
@@ -50,8 +56,7 @@ TEST(protest, null_file)
      fclose(d);
      ASSERT_EQ(readcount,readcount2);
 
-}
-
+}*/
 
 TEST(protest, show)
 {
@@ -62,12 +67,11 @@ TEST(protest, show)
      oldstdout = dup(STDOUT);
      dup2(fptr,STDOUT);
 
+     char *filedir=(char*)malloc(1024);
+     sprintf(filedir, "%s/load.txt", TESTIDIR);
 
      text txt = create_text();
-     load(txt,(char *)"testi/load.txt");
-
-
-//printf("BINGOOOO %d", txt->cursor->position);
+     load(txt, filedir);
      show(txt);
 
 
@@ -83,7 +87,9 @@ dup2(oldstdout,STDOUT);
      int readcount = fread(buf,1,512,t2);
 
      FILE *d2;
-     d2 =fopen("testi/proveka.txt","rw");
+     sprintf(filedir, "%s/proveka.txt", TESTIDIR);
+     d2 =fopen(filedir,"rw");
+
      if(d2 == NULL){
             FAIL();
             return;
@@ -96,7 +102,6 @@ dup2(oldstdout,STDOUT);
 
 }
 
-
 TEST(protest, pp_first_line)
 {
      int fptr;
@@ -107,8 +112,11 @@ TEST(protest, pp_first_line)
      dup2(fptr,STDOUT);
      close(fptr);
 
+     char *filedir=(char*)malloc(1024);
+     sprintf(filedir, "%s/load.txt", TESTIDIR);
+
      text txt = create_text();
-     load(txt,(char *)"testi/load.txt");
+     load(txt, filedir);
      c_to_pos(txt,0,0);
      pp(txt,(char *)"good");
 
@@ -129,7 +137,10 @@ TEST(protest, pp_first_line)
      readcount+=fread(buf1,1,512,t2);
         }
      FILE *d2;
-     d2 =fopen("testi/pp_first_line.txt","rw");
+
+     sprintf(filedir, "%s/pp_first_line.txt", TESTIDIR);
+     d2 =fopen(filedir,"rw");
+
      if(d2 == NULL){
             FAIL();
             return;
@@ -170,8 +181,11 @@ TEST(protest, pp_second_line)
      dup2(fptr,STDOUT);
      close(fptr);
 
+     char *filedir=(char*)malloc(1024);
+     sprintf(filedir, "%s/load.txt", TESTIDIR);
+
      text txt = create_text();
-     load(txt,(char *)"testi/load.txt");
+     load(txt, filedir);
      c_to_pos(txt,1,0);
      pp(txt,(char *)"good");
 
@@ -192,7 +206,10 @@ TEST(protest, pp_second_line)
      readcount+=fread(buf1,1,512,t2);
         }
      FILE *d2;
-     d2 =fopen("testi/pp_second_line.txt","rw");
+
+     sprintf(filedir, "%s/pp_second_line.txt", TESTIDIR);
+     d2 =fopen(filedir,"rw");
+
      if(d2 == NULL){
             FAIL();
             return;

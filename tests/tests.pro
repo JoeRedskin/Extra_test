@@ -14,6 +14,8 @@ QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
 QMAKE_CFLAGS += -fprofile-arcs -ftest-coverage
 LIBS += -lgcov
 
+DEFINES += TESTIDIR=\\\"$$PWD/../testi\\\"
+
 
 HEADERS +=  ../app/common.h \
     ../app/text/text.h \
