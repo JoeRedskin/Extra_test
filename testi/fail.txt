@@ -1,1 +1,1 @@
-The file /home/01/markov/gtest-master/tests/../testi/load.k cannot be opened
+The file /testi/load.k cannot be opened
