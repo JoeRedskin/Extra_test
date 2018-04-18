@@ -17,7 +17,7 @@ TEST (abc, test1)
     text txt = create_text();
     ASSERT_EQ(pos_return(txt), 0);
 }
-/*TEST(protest, null_file)
+TEST(protest, null_file)
 {
      int fptr;
      int oldstdout;
@@ -57,7 +57,7 @@ TEST (abc, test1)
      fclose(d);
      ASSERT_EQ(readcount,readcount2);
 
-}*/
+}
 
 TEST(protest, show)
 {
