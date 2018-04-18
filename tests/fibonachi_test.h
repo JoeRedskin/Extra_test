@@ -17,47 +17,6 @@ TEST (abc, test1)
     text txt = create_text();
     ASSERT_EQ(pos_return(txt), 0);
 }
-TEST(protest, null_file)
-{
-     int fptr;
-     int oldstdout;
-     fptr = open("DUMMY.FIL",O_CREAT|O_RDWR,S_IREAD|S_IWRITE);
-     oldstdout = dup(STDOUT);
-     dup2(fptr,STDOUT);
-     close(fptr);
-
-     char *filedir=(char*)malloc(1024);
-     sprintf(filedir, "%s/load.k", TESTIDIR);
-
-     text txt = create_text();
-     load(txt, filedir);
-     dup2(oldstdout,STDOUT);
-
-     FILE *t;
-     t = fopen("DUMMY.FIL","rw");
-     if(t == NULL){
-            FAIL();
-            return;
-     }
-     char *buf = (char*)malloc(sizeof(char)*512);
-     int readcount = fread(buf,1,512,t);
-
-     FILE *d;
-
-     sprintf(filedir, "%s/fail.txt", TESTIDIR);
-     d =fopen(filedir,"rw");
-
-     if(d == NULL){
-            FAIL();
-            return;
-     }
-     char *buf2 = (char*)malloc(sizeof(char)*512);
-     int readcount2 = fread(buf2,1,512,d);
-     fclose(t);
-     fclose(d);
-     ASSERT_EQ(readcount,readcount2);
-
-}
 
 TEST(protest, show)
 {
@@ -468,19 +427,4 @@ TEST(protest, shovevenbeforodd2)
 }
 }
 
-/*TEST(fibonachiTest, num0) {
-    ASSERT_EQ(fibonachi(0), 0);
-    ASSERT_EQ(fibonachi(1), 1);
-    ASSERT_EQ(fibonachi(2), 2);
-}
-
-TEST(fibonachiTest, greather2) {
-    ASSERT_EQ(fibonachi(5), 5);
-    ASSERT_EQ(fibonachi(10), 55);
-}
-
-TEST(fibonachiTest, negative) {
-    ASSERT_EQ(fibonachi(-1), 0);
-}
-*/
-#endif // FIBONACHI_H
+#endif
