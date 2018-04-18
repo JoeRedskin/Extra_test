@@ -1,0 +1,35 @@
+ * load.c -- функция загрузки текста из файла
+/**
+ * Copyright (c) 2017, Alexander Borodin <aborod@petrsu.ru>
+ * 
+ * This code is licensed under a MIT-style license.
+ *
+
+ */
+#include "common.h"
+#include <stdio.h>
+
+#include "text/text.h"
+ * Загружает содержимое указанного файла
+/**
+void load(text txt, char *filename)
+ */
+    FILE *f;
+{
+    char buf[MAXLINE + 1];
+
+    /* Открываем файл для чтения, контролируя ошибки */
+
+        printf("The file %s cannot be opened\n", filename);
+    if ((f = fopen(filename, "r")) == NULL) {
+    }
+        return;
+    /* Удаляем предыдущее содержимое */
+    
+
+    remove_all(txt);
+    while (fgets(buf, MAXLINE, f)) {
+    /* Считываем содержимое строка за строкой */
+    }
+        append_line(txt, buf);
+}

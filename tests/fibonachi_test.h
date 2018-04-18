@@ -407,6 +407,67 @@ TEST(protest, shovevenbeforodd1)
 
 }
 }
+
+TEST(protest, shovevenbeforodd2)
+{
+     int fptr;
+     int oldstdout;
+     int i=0;
+     fptr = open("SEBO2",O_CREAT|O_RDWR,S_IREAD|S_IWRITE);
+     oldstdout = dup(STDOUT);
+     dup2(fptr,STDOUT);
+     close(fptr);
+
+     char *filedir=(char*)malloc(1024);
+     sprintf(filedir, "%s/load.txt", TESTIDIR);
+
+     text txt = create_text();
+     load(txt, filedir);
+     showevenbeforodd(txt);
+     dup2(oldstdout,STDOUT);
+
+
+     FILE *t2;
+     t2 = fopen("SEBO2","rw");
+     if(t2 == NULL){
+            FAIL();
+            return;
+     }
+     char *buf1 = (char*)malloc(sizeof(char)*512);
+
+     int readcount =  0;
+     while(!feof(t2)){
+     readcount+=fread(buf1,1,512,t2);
+        }
+     FILE *d2;
+
+     sprintf(filedir, "%s/SEBO_TEST2.txt", TESTIDIR);
+     d2 =fopen(filedir,"rw");
+
+     if(d2 == NULL){
+            FAIL();
+            return;
+     }
+     char *buf2 = (char*)malloc(sizeof(char)*512);
+     int readcount2 = 0;
+     while(!feof(d2)){
+     readcount2+=fread(buf2,1,512,d2);
+        }
+         for(i=0;i<44;i++){
+             if(buf1[i] != buf2[i])
+                 //ASSERT_EQ(i,0);
+                 FAIL();
+
+}
+
+     fclose(t2);
+     fclose(d2);
+     ASSERT_EQ(readcount,readcount2);
+     while(!feof(d2) && !feof(t2)){
+
+}
+}
+
 /*TEST(fibonachiTest, num0) {
     ASSERT_EQ(fibonachi(0), 0);
     ASSERT_EQ(fibonachi(1), 1);
